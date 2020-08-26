@@ -8,3 +8,9 @@
 .layout-fix{
     padding-top: 66px;
 }
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
