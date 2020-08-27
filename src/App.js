@@ -12,15 +12,16 @@ class App extends Component {
 
   render() {
     return (
+      <React.StrictMode>
+        <BrowserRouter>
+          <Header></Header>
+          <Container fixed className="layout-fix" >
+            <Routes></Routes>
 
-      <BrowserRouter>
-        <Header></Header>
-        <Container fixed className="layout-fix" >
-          <Routes></Routes>
-
-        </Container>
-        <Footer></Footer>
-      </BrowserRouter>
+          </Container>
+          <Footer></Footer>
+        </BrowserRouter>
+      </React.StrictMode>
     );
   }
 
