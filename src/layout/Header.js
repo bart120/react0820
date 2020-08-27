@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Button, AppBar, Toolbar } from '@material-ui/core';
+import { AppBar, Toolbar } from '@material-ui/core';
 import HeaderLogin from '../core/components/HeaderLogin';
+import { Link } from 'react-router-dom';
+
 //import { PropTypes } from 'prop-types';
 
 class Header extends Component {
@@ -33,9 +35,9 @@ class Header extends Component {
             <AppBar>
                 <Toolbar>
                     <h3>MonApp</h3>
-                    <a href="" className="lien">Accueil</a>
-                    <a href="" className="lien">Salles</a>
-                    <a href="" className="lien">Ajouter</a>
+                    <Link to="/" className="lien">Accueil</Link>
+                    <Link to="/rooms/list" className="lien">Salles</Link>
+                    <Link to="/rooms/add" className="lien">Ajouter</Link>
 
                     <HeaderLogin></HeaderLogin>
 

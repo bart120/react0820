@@ -3,21 +3,24 @@ import './App.css';
 import Header from './layout/Header';
 import { Container } from '@material-ui/core';
 import Footer from './layout/Footer';
+import { BrowserRouter } from 'react-router-dom';
+import Routes from './core/router/Routes';
+
 
 
 class App extends Component {
 
   render() {
     return (
-      
-      <>
+
+      <BrowserRouter>
         <Header></Header>
         <Container fixed className="layout-fix" >
-          l'app
-          
+          <Routes></Routes>
+
         </Container>
         <Footer></Footer>
-      </>
+      </BrowserRouter>
     );
   }
 

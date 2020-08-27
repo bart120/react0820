@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 class HeaderLogin extends Component {
 
@@ -18,7 +19,7 @@ class HeaderLogin extends Component {
             <>
                 {this.state.user ?
                     (<span>Bonjour {this.state.user}</span>) :
-                    (<Button onClick={this.onTest}>Se connecter</Button>)
+                    (<Link to="/auth/login" className="lien">Se connecter</Link>)
                 }
             </>);
     }
