@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
 import { bindActionCreators } from 'redux';
@@ -19,9 +19,11 @@ class HeaderLogin extends Component {
 
     onLogout = () => {
         this.props.logout();
+        this.props.history.push('/');
     }
 
     render() {
+        console.log('PROPS HEADERLOGIN: ', this.props);
         return (
             <>
                 {this.props.user ?
@@ -56,4 +58,4 @@ const mapDispatchToProps = (payload) => {
     return { logout: bindActionCreators(logout, payload) };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderLogin);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(HeaderLogin));
