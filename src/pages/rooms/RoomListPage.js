@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import RoomService from '../../services/RoomService';
-import { TableContainer, Table, TableCell, TableHead, TableRow, TableBody, makeStyles, Paper, Button } from '@material-ui/core';
+//import RoomService from '../../services/RoomService';
+import { TableContainer, Table, TableCell, TableHead, TableRow, TableBody, Paper, Button } from '@material-ui/core';
+import { connect } from 'react-redux';
 
-const useStyles = makeStyles({
+/*const useStyles = makeStyles({
     table: {
         minWidth: 650,
     },
-});
+});*/
 
 class RoomListPage extends Component {
 
-    servRoom = new RoomService();
+    //servRoom = new RoomService();
     //classes = useStyles();
 
     state = {
@@ -18,16 +19,17 @@ class RoomListPage extends Component {
     }
 
     componentDidMount() {
-        this.servRoom.getRooms().then((data) => {
+        //console.log('PROPS: ', this.props);
+        this.props.servRoom.getRooms().then((data) => {
             this.setState({ rooms: data });
             //console.log(data);
         });
     }
 
     deleteRow(id) {
-        this.servRoom.deleteRoom(id).then((room) => {
+        this.props.servRoom.deleteRoom(id).then((room) => {
             alert(`La salle ${room.name} a été supprimé.`);
-            this.servRoom.getRooms().then((data) => {
+            this.props.servRoom.getRooms().then((data) => {
                 this.setState({ rooms: data });
             });
         });
@@ -72,6 +74,9 @@ class RoomListPage extends Component {
 
 }
 
+const mapStateToProps = (stateStore) => {
+    //console.log('STORE', stateStore);
+    return { servRoom: stateStore.service.serviceRoom };
+}
 
-
-export default RoomListPage;
+export default connect(mapStateToProps)(RoomListPage);

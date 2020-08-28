@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { TextField, Button, Select, FormControl, InputLabel, MenuItem, Snackbar } from '@material-ui/core';
-import RoomService from '../../services/RoomService';
+
 import { Alert } from '@material-ui/lab';
+import { connect } from 'react-redux';
 
 class RoomAddPage extends Component {
 
-    servRoom = new RoomService();
+    //servRoom = new RoomService();
 
     state = {
         room: {},
@@ -21,7 +22,7 @@ class RoomAddPage extends Component {
     onSubmit = (ev) => {
         ev.preventDefault();
         //console.log(this.state.room);
-        this.servRoom.addRoom(this.state.room).then((room) => {
+        this.props.servRoom.addRoom(this.state.room).then((room) => {
             //alert(`La salle ${room.name} a été ajouté avec l'id ${room.id}`);
             this.setState({ message: `La salle ${room.name} a été ajouté avec l'id ${room.id}` });
         });
@@ -34,8 +35,6 @@ class RoomAddPage extends Component {
     handleClose = () => {
         this.setState({ message: '' });
     }
-
-
 
     render() {
         return (
@@ -75,7 +74,10 @@ class RoomAddPage extends Component {
             </>
         );
     }
-
 }
 
-export default RoomAddPage;
+const mapStateToProps = (stateStore) => {
+    return { servRoom: stateStore.service.serviceRoom };
+}
+
+export default connect(mapStateToProps)(RoomAddPage);

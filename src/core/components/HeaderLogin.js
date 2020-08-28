@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Button } from '@material-ui/core';
+import { bindActionCreators } from 'redux';
+import { logout } from '../redux/actions/AuthenticationActions';
 
 class HeaderLogin extends Component {
 
@@ -9,16 +13,23 @@ class HeaderLogin extends Component {
         this.onTest = this.onTest.bind(this);
     }*/
 
-    state = {
+    /*state = {
         user: null
+    }*/
+
+    onLogout = () => {
+        this.props.logout();
     }
 
     render() {
         return (
             <>
-                {this.state.user ?
-                    (<span>Bonjour {this.state.user}</span>) :
-                    (<Link to="/auth/login" className="lien">Se connecter</Link>)
+                {this.props.user ?
+                    (<>
+                        <span>Bonjour {this.props.user.email}</span>
+                        <Button onClick={this.onLogout}>Se déconnecter</Button>
+                    </>
+                    ) : (<Link to="/auth/login" className="lien">Se connecter</Link>)
                 }
             </>);
     }
@@ -29,12 +40,20 @@ class HeaderLogin extends Component {
         console.log("USER ", this.state.user);
     }*/
 
-    onTest = () => {
+    /*onTest = () => {
         console.log('THIS ', this);
         //this.state.user = 'toto';
         this.setState({ user: 'toto' });
         console.log("USER ", this.state.user);
-    }
+    }*/
 }
 
-export default HeaderLogin;
+const mapStateToProps = (stateStore) => {
+    return { user: stateStore.auth.user };
+}
+
+const mapDispatchToProps = (payload) => {
+    return { logout: bindActionCreators(logout, payload) };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderLogin);
