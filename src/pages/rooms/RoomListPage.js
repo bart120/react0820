@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import RoomService from '../../services/RoomService';
-import { TableContainer, Table, TableCell, TableHead, TableRow, TableBody, makeStyles, Paper } from '@material-ui/core';
+import { TableContainer, Table, TableCell, TableHead, TableRow, TableBody, makeStyles, Paper, Button } from '@material-ui/core';
 
 const useStyles = makeStyles({
     table: {
@@ -20,7 +20,18 @@ class RoomListPage extends Component {
     componentDidMount() {
         this.servRoom.getRooms().then((data) => {
             this.setState({ rooms: data });
+            //console.log(data);
         });
+    }
+
+    deleteRow(id) {
+        this.servRoom.deleteRoom(id).then((room) => {
+            alert(`La salle ${room.name} a été supprimé.`);
+            this.servRoom.getRooms().then((data) => {
+                this.setState({ rooms: data });
+            });
+        });
+        //console.log('ID', id);
     }
 
     render() {
@@ -35,16 +46,20 @@ class RoomListPage extends Component {
                                     <TableCell>Nom</TableCell>
                                     <TableCell align="right">Prix</TableCell>
                                     <TableCell align="right">Places</TableCell>
+                                    <TableCell align="right"></TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 {this.state.rooms.map((room) => (
-                                    <TableRow key={room.name}>
+                                    <TableRow key={room.id}>
                                         <TableCell component="th" scope="row">
                                             {room.name}
                                         </TableCell>
                                         <TableCell align="right">{room.price}</TableCell>
                                         <TableCell align="right">{room.seatCount}</TableCell>
+                                        <TableCell align="right">
+                                            <Button variant="contained" color="primary" onClick={() => this.deleteRow(room.id)}>Supprimer</Button>
+                                        </TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>

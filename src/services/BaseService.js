@@ -14,8 +14,8 @@ class BaseService {
         return axios.put(url, obj).then(this.promiseResolve).catch(this.promiseRefect);
     }
 
-    delete(url, obj) {
-        return axios.delete(url, obj).then(this.promiseResolve).catch(this.promiseRefect);
+    delete(url) {
+        return axios.delete(url).then(this.promiseResolve).catch(this.promiseRefect);
     }
 
 

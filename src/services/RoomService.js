@@ -11,6 +11,17 @@ class RoomService extends BaseService {
         return this.get(URL_ROOMS);
     }
 
+    deleteRoom(id) {
+        return this.delete(`${URL_ROOMS}/${id}`);
+    }
+
+    addRoom(room) {
+        return this.post(URL_ROOMS, room);
+    }
+
+    updateRoom(room) {
+        return this.put(`${URL_ROOMS}/${room.id}`, room);
+    }
 
 }
 
